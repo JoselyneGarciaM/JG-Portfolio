@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fractional Legal Ops · Joselyne García Legal Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FFFFFF; --bg: #F7F8FA; --ink: #111318; --ink2: #2C2F38;
+      --muted: #6B7080; --border: #E0E3EA;
+      --blue: #1547D4; --blue2: #1A56E8; --blue-bg: #EEF2FD;
+      --dark-bg: #080A12;
+    }
+    html, body { min-height: 100vh; background: var(--white); color: var(--ink); font-family: 'Inter', sans-serif; }
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 56px; border-bottom: 1px solid var(--border);
+    }
+    .brand { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; color: var(--blue); text-transform: uppercase; }
+    .tier-badge { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .14em; color: var(--white); background: var(--blue); padding: 6px 16px; text-transform: uppercase; }
+    main { flex: 1; display: flex; flex-direction: column; }
+    .hero-strip {
+      padding: 56px 56px 48px; border-bottom: 1px solid var(--border);
+      background: var(--bg); position: relative; overflow: hidden;
+    }
+    .service-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--blue); text-transform: uppercase; margin-bottom: 16px; opacity: .7; }
+    .title-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+    .service-title { font-family: 'DM Serif Display', serif; font-size: clamp(44px, 6vw, 72px); line-height: 1.0; letter-spacing: -.025em; color: var(--ink); }
+    .service-title .blue { color: var(--blue); font-style: italic; }
+    .hero-sub { max-width: 440px; padding-bottom: 4px; }
+    .hero-sub p { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 16px; }
+    .embedded-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .1em;
+      color: var(--blue); border: 1px solid rgba(21,71,212,.2);
+      background: var(--blue-bg); padding: 8px 16px; text-transform: uppercase;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; animation: blink 1.8s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .rhythm-grid { display: grid; grid-template-columns: repeat(4,1fr); flex: 1; }
+    .rhythm-col { padding: 44px 36px; border-right: 1px solid var(--border); }
+    .rhythm-col:last-child { border-right: none; }
+    .rhythm-col:nth-child(even) { background: var(--bg); }
+    .cadence { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; margin-bottom: 16px; }
+    .rhythm-title { font-family: 'DM Serif Display', serif; font-size: 19px; margin-bottom: 20px; line-height: 1.2; color: var(--ink); }
+    .r-item { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--ink2); line-height: 1.55; padding-left: 16px; position: relative; }
+    .r-item:first-child { border-top: 1px solid var(--border); }
+    .r-item::before { content: '→'; position: absolute; left: 0; top: 11px; color: var(--blue); font-size: 11px; }
+    .bottom-strip { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--border); }
+    .bs-left { padding: 36px 56px; border-right: 1px solid var(--border); }
+    .bs-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; margin-bottom: 10px; }
+    .bs-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; color: var(--ink2); line-height: 1.6; }
+    .bs-right { padding: 36px 56px; background: var(--bg); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .bs-cta-text { font-size: 14px; color: var(--muted); max-width: 240px; line-height: 1.6; }
+    .bs-cta-link { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em; color: var(--white); background: var(--blue); padding: 12px 22px; text-decoration: none; white-space: nowrap; transition: background .2s; }
+    .bs-cta-link:hover { background: var(--blue2); }
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 20px 56px; border-top: 1px solid var(--border); }
+    .f-left { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+    .f-right { font-size: 12px; color: var(--muted); }
+    @media (max-width: 900px) {
+      header, footer { padding: 20px 24px; }
+      .hero-strip { padding: 40px 24px 36px; }
+      .title-row { flex-direction: column; gap: 24px; }
+      .rhythm-grid { grid-template-columns: 1fr 1fr; }
+      .bottom-strip { grid-template-columns: 1fr; }
+      .bs-left { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+      .bs-right { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="brand">Joselyne García · Legal Ops Studio</div>
+    <div class="tier-badge">Tier 03 · Ongoing</div>
+  </header>
+  <main>
+    <div class="hero-strip">
+      <div class="service-num">Service № 03</div>
+      <div class="title-row">
+        <h1 class="service-title">Fractional<br/><span class="blue">Legal Ops</span></h1>
+        <div class="hero-sub">
+          <p>A dedicated Legal Ops expert embedded in your team on an ongoing basis. You get the function without the full-time hire — and Legal gets to focus on law.</p>
+          <div class="embedded-badge"><span class="dot"></span>Embedded · Ongoing · Slack or Teams</div>
+        </div>
+      </div>
+    </div>
+    <div class="rhythm-grid">
+      <div class="rhythm-col">
+        <div class="cadence">Always on</div>
+        <div class="rhythm-title">Contract Lifecycle Management</div>
+        <div class="r-item">Dedicated point of contact in your Slack or Teams</div>
+        <div class="r-item">Manage contract lifecycle from request to signature</div>
+        <div class="r-item">Chase approvals, flag delays, close loops</div>
+        <div class="r-item">Maintain the contract register — new contracts logged, renewals calendared</div>
+        <div class="r-item">First-line review of standard contracts (NDAs, MSAs, SaaS subs)</div>
+      </div>
+      <div class="rhythm-col">
+        <div class="cadence">Monthly</div>
+        <div class="rhythm-title">Workflow Review</div>
+        <div class="r-item">Run a monthly workflow review: what's slow, what's breaking</div>
+        <div class="r-item">Identify recurring requests that can be automated or made self-serve</div>
+        <div class="r-item">Manage your CLM or contract tooling</div>
+        <div class="r-item">Configuration, user issues, data hygiene</div>
+      </div>
+      <div class="rhythm-col">
+        <div class="cadence">Ongoing</div>
+        <div class="rhythm-title">Template & Playbook Iteration</div>
+        <div class="r-item">Keep your template library current as business evolves</div>
+        <div class="r-item">Update playbooks when law changes or negotiations reveal gaps</div>
+        <div class="r-item">Build new templates when a contract type crosses a volume threshold</div>
+      </div>
+      <div class="rhythm-col">
+        <div class="cadence">Quarterly</div>
+        <div class="rhythm-title">Legal Ops Health Review</div>
+        <div class="r-item">Full metrics report on contract volume, cycle times, and bottlenecks</div>
+        <div class="r-item">Review against targets set in the prior quarter</div>
+        <div class="r-item">Prioritised roadmap for the next 90 days</div>
+        <div class="r-item">Executive-ready summary you can share with leadership</div>
+      </div>
+    </div>
+    <div class="bottom-strip">
+      <div class="bs-left">
+        <div class="bs-label">The principle</div>
+        <p class="bs-text">"Legal only sees what needs legal judgment. Everything else gets handled, routed, or automated before it reaches them."</p>
+      </div>
+      <div class="bs-right">
+        <div class="bs-cta-text">Best when you want someone who owns operations, so legal can focus on legal.</div>
+        <a href="mailto:joselyne.garcia.m@gmail.com" class="bs-cta-link">Start a conversation →</a>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="f-left">joselyne.garcia.m@gmail.com</div>
+    <div class="f-right">Joselyne García · Legal Ops Studio · 2026</div>
+  </footer>
+</div>
+</body>
+</html>

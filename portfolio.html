@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joselyne García · Legal Ops Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #FFFFFF;
+      --bg:      #F7F8FA;
+      --black:   #080A0E;
+      --ink:     #111318;
+      --ink2:    #2C2F38;
+      --muted:   #6B7080;
+      --border:  #E0E3EA;
+      --blue:    #1547D4;
+      --blue2:   #1A56E8;
+      --blue-bg: #EEF2FD;
+      --blue-dim:#3A67F5;
+      --dark-bg: #080A12;
+      --dark2:   #0D1020;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV TOP ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px;
+      height: 64px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-left {
+      display: flex; align-items: center; gap: 40px;
+    }
+    .nav-wordmark {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: .12em; color: var(--blue); text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-divider {
+      width: 1px; height: 20px; background: var(--border);
+    }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a {
+      font-size: 13px; letter-spacing: .04em; color: var(--muted);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--blue); }
+    .nav-tag {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: .08em; color: var(--white);
+      background: var(--blue); padding: 10px 24px;
+      text-decoration: none; transition: background .2s;
+      white-space: nowrap;
+    }
+    .nav-tag:hover { background: var(--blue2); }
+
+    main { }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      padding: 104px 64px 80px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: end;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: .16em; color: var(--blue);
+      text-transform: uppercase; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 2px; background: var(--blue);
+    }
+    .hero-h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 7vw, 92px);
+      line-height: 1.0; letter-spacing: -.025em;
+      color: var(--ink); margin-bottom: 4px;
+    }
+    .hero-h1 .blue { color: var(--blue); font-style: italic; display: block; }
+    .hero-sub-label {
+      font-size: 13px; letter-spacing: .1em;
+      color: var(--muted); text-transform: uppercase;
+      margin-top: 28px; margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .hero-tagline {
+      font-size: 16px; color: var(--ink2);
+      max-width: 440px; line-height: 1.7;
+    }
+    .hero-right {
+      padding-bottom: 8px; display: flex;
+      flex-direction: column; justify-content: flex-end; gap: 32px;
+    }
+    .strategy-bar {
+      border: 1px solid var(--border); padding: 20px 28px;
+      display: flex; align-items: center; gap: 16px;
+    }
+    .sb-icon {
+      width: 40px; height: 40px; border: 2px solid var(--blue);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .sb-icon svg { width: 20px; height: 20px; }
+    .sb-words {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: .12em; color: var(--blue); text-transform: uppercase;
+    }
+    .hero-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip {
+      font-size: 12px; letter-spacing: .04em;
+      border: 1px solid var(--border); padding: 6px 14px;
+      color: var(--muted); transition: all .2s; cursor: default;
+    }
+    .chip:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-bg); }
+    .hero-stat-row {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+    }
+    .hs-cell {
+      background: var(--white); padding: 20px 20px;
+      text-align: center;
+    }
+    .hs-num {
+      font-family: 'DM Serif Display', serif; font-size: 32px;
+      color: var(--blue); line-height: 1;
+    }
+    .hs-label { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION SHELL ── */
+    section {
+      padding: 88px 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    section.dark {
+      background: var(--dark-bg); color: var(--white);
+      --ink: #FFFFFF; --ink2: #C8CBD4; --muted: #8088A0;
+      --border: #1C2030;
+    }
+    section.tinted { background: var(--bg); }
+
+    .sec-eyebrow {
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: .16em; color: var(--blue);
+      text-transform: uppercase; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sec-eyebrow .num { color: var(--blue); }
+    .sec-eyebrow::before {
+      content: ''; display: block;
+      width: 24px; height: 2px; background: var(--blue);
+      flex-shrink: 0;
+    }
+    .sec-h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height: 1.1; letter-spacing: -.02em;
+      color: var(--ink); margin-bottom: 40px;
+    }
+    .sec-h2 .blue { color: var(--blue); font-style: italic; }
+    .sec-h2 .blue-dark { color: var(--blue-dim, #3A67F5); font-style: italic; }
+
+    /* ── ABOUT ── */
+    .about-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    }
+    .about-body p {
+      font-size: 17px; color: var(--ink2);
+      line-height: 1.85; margin-bottom: 20px;
+    }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body strong { color: var(--ink); font-weight: 600; }
+    .about-body .blue-text { color: var(--blue); font-weight: 600; }
+
+    .quals { border-top: 2px solid var(--blue); }
+    .q-row {
+      padding: 18px 0; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 120px 1fr; gap: 20px;
+    }
+    .q-label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .1em; color: var(--muted); text-transform: uppercase;
+      padding-top: 2px;
+    }
+    .q-val { font-size: 14px; color: var(--ink2); line-height: 1.55; }
+
+    /* ── NUMBERS ── */
+    .numbers-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border);
+    }
+    .n-cell {
+      background: var(--white); padding: 48px 40px;
+      transition: background .2s;
+    }
+    .n-cell:hover { background: var(--blue-bg); }
+    .n-big {
+      font-family: 'DM Serif Display', serif;
+      font-size: 72px; line-height: 1; color: var(--blue);
+      margin-bottom: 12px; letter-spacing: -.02em;
+    }
+    .n-big sup { font-size: 36px; }
+    .n-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── METHOD ── */
+    .method-grid {
+      display: grid; grid-template-columns: repeat(6,1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    .m-step {
+      background: var(--white); padding: 36px 24px;
+      text-align: center; position: relative; overflow: hidden;
+      cursor: default; transition: background .2s;
+    }
+    .m-step::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 0; right: 0; height: 3px;
+      background: var(--blue);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s ease;
+    }
+    .m-step:hover { background: var(--blue-bg); }
+    .m-step:hover::after { transform: scaleX(1); }
+    .m-num {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .14em; color: var(--blue); margin-bottom: 10px;
+      opacity: .6;
+    }
+    .m-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px; color: var(--ink);
+    }
+    .m-desc {
+      font-size: 11px; color: var(--muted); margin-top: 8px;
+      line-height: 1.5; opacity: 0; transform: translateY(4px);
+      transition: opacity .25s, transform .25s;
+    }
+    .m-step:hover .m-desc { opacity: 1; transform: translateY(0); }
+
+    /* ── CASES ── */
+    .case-item {
+      display: grid; grid-template-columns: 88px 1fr;
+      gap: 32px; padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: padding .2s, background .2s;
+    }
+    .case-item:first-child { border-top: 1px solid var(--border); }
+    .case-item:hover {
+      background: var(--blue-bg);
+      padding-left: 20px; padding-right: 20px;
+      margin: 0 -64px; padding-left: 84px; padding-right: 64px;
+    }
+    .c-num {
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      color: var(--blue); padding-top: 4px; font-weight: 500;
+    }
+    .c-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .c-tag {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .08em; color: var(--blue);
+      background: var(--blue-bg); padding: 3px 10px;
+      border: 1px solid rgba(21,71,212,.15);
+      text-transform: uppercase;
+    }
+    .c-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px; color: var(--ink); margin-bottom: 10px; line-height: 1.3;
+    }
+    .c-body { font-size: 14px; color: var(--muted); line-height: 1.75; }
+    .c-body-full {
+      font-size: 14px; color: var(--muted); line-height: 1.75;
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s ease, opacity .3s;
+      opacity: 0; margin-top: 0;
+    }
+    .case-item.open .c-body-full { max-height: 300px; opacity: 1; margin-top: 12px; }
+    .c-toggle {
+      display: inline-block; margin-top: 12px;
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: .1em; color: var(--blue);
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s;
+    }
+    .c-toggle:hover { border-color: var(--blue); }
+
+    /* ── SERVICES ── */
+    .svc-grid {
+      display: grid; grid-template-columns: repeat(3,1fr);
+      gap: 1px; background: var(--border); border: 1px solid var(--border);
+      margin-top: 48px;
+    }
+    .svc-card {
+      background: var(--white); padding: 48px 36px;
+      display: flex; flex-direction: column;
+      border-top: 3px solid var(--border);
+      transition: border-color .2s, background .2s;
+    }
+    .svc-card:hover { border-top-color: var(--blue); background: var(--blue-bg); }
+    .svc-card.featured { border-top-color: var(--blue); }
+    .svc-tier {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .14em; color: var(--blue);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .svc-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px; color: var(--ink); line-height: 1.2; margin-bottom: 16px;
+    }
+    .svc-desc { font-size: 14px; color: var(--muted); line-height: 1.75; margin-bottom: 28px; }
+    .svc-list { flex-grow: 1; margin-bottom: 28px; }
+    .svc-list li {
+      font-size: 13px; color: var(--ink2);
+      padding: 7px 0; border-bottom: 1px solid var(--border);
+      list-style: none; padding-left: 18px; position: relative;
+      line-height: 1.5;
+    }
+    .svc-list li:first-child { border-top: 1px solid var(--border); }
+    .svc-list li::before {
+      content: '→'; position: absolute; left: 0;
+      color: var(--blue); font-size: 12px; top: 8px;
+    }
+    .svc-best {
+      font-size: 13px; color: var(--muted);
+      border-top: 1px solid var(--border); padding-top: 20px;
+    }
+    .svc-best strong { color: var(--blue); font-weight: 600; }
+
+    /* ── DARK BAND ── */
+    .dark-band {
+      background: var(--dark-bg); padding: 88px 64px;
+      border-bottom: none;
+    }
+    .dark-band .sec-eyebrow { color: var(--blue-dim, #3A67F5); }
+    .dark-band .sec-eyebrow::before { background: var(--blue-dim, #3A67F5); }
+    .dark-band .sec-h2 { color: #FFFFFF; }
+    .dark-band .sec-h2 .blue { color: #3A67F5; }
+
+    /* ── CTA ── */
+    .cta-inner {
+      max-width: 640px; margin: 0 auto; text-align: center; padding: 48px 0;
+    }
+    .cta-h {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(36px, 5vw, 60px);
+      line-height: 1.1; letter-spacing: -.02em;
+      color: #FFFFFF; margin-bottom: 20px;
+    }
+    .cta-h .blue { color: #3A67F5; font-style: italic; }
+    .cta-sub { font-size: 16px; color: #8088A0; margin-bottom: 40px; line-height: 1.7; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: var(--blue); color: #FFFFFF;
+      font-size: 15px; font-weight: 600; letter-spacing: .03em;
+      padding: 16px 40px; text-decoration: none;
+      transition: background .2s, transform .2s;
+    }
+    .cta-btn:hover { background: var(--blue2); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 28px 64px;
+      display: flex; justify-content: space-between; align-items: center;
+      border-top: 1px solid var(--border); background: var(--white);
+    }
+    .f-brand {
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: .1em; color: var(--muted);
+    }
+    .f-right { font-size: 12px; color: var(--muted); }
+
+    /* ── FADE IN ── */
+    .fi { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .fi.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      nav { left: 0; padding: 14px 24px; }
+      .nav-links { display: none; }
+      section, .dark-band { padding: 64px 24px; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
+      .about-layout { grid-template-columns: 1fr; gap: 40px; }
+      .numbers-grid { grid-template-columns: 1fr; }
+      .method-grid { grid-template-columns: repeat(3,1fr); }
+      .svc-grid { grid-template-columns: 1fr; }
+      .case-item:hover { margin: 0; padding: 36px 0; }
+      footer { padding: 24px; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav>
+  <div class="nav-left">
+    <div class="nav-wordmark">JG · Legal Ops Studio</div>
+    <div class="nav-divider"></div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#numbers">Numbers</a>
+      <a href="#cases">Cases</a>
+      <a href="#services">Services</a>
+    </div>
+  </div>
+  <a href="mailto:joselyne.garcia.m@gmail.com" class="nav-tag">Get in touch →</a>
+</nav>
+
+<main>
+
+<!-- ── HERO ── -->
+<div class="hero" id="top">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Legal AI Implementation · LegalTech Consulting</div>
+    <h1 class="hero-h1">
+      Joselyne<br/>
+      <span class="blue">García.</span>
+    </h1>
+    <p class="hero-sub-label">Legal Ops · Strategy · Execution</p>
+    <p class="hero-tagline">Reality-checker between the hype and what actually works in a real legal environment.</p>
+  </div>
+  <div class="hero-right fi">
+    <div class="strategy-bar">
+      <div class="sb-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1547D4" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+        </svg>
+      </div>
+      <div>
+        <div class="sb-words">Strategy × Systems × Impact</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px;">End-to-end legaltech strategy and execution for modern legal teams.</div>
+      </div>
+    </div>
+    <div class="hero-chips">
+      <span class="chip">LL.M. Digital Economy</span>
+      <span class="chip">EU Digital Regulation</span>
+      <span class="chip">Transnational Law</span>
+      <span class="chip">CLM Implementation</span>
+      <span class="chip">Contract Automation</span>
+    </div>
+    <div class="hero-stat-row">
+      <div class="hs-cell">
+        <div class="hs-num">50+</div>
+        <div class="hs-label">Enterprise clients onboarded</div>
+      </div>
+      <div class="hs-cell">
+        <div class="hs-num">1K+</div>
+        <div class="hs-label">Contracts managed</div>
+      </div>
+      <div class="hs-cell">
+        <div class="hs-num">50%</div>
+        <div class="hs-label">Reduction in manual work</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="sec-eyebrow"><span class="num">01</span> About</div>
+  <div class="about-layout fi">
+    <div>
+      <h2 class="sec-h2">The lawyer who <span class="blue">actually builds</span> the thing.</h2>
+      <div class="about-body">
+        <p>I'm Joselyne García, a qualified lawyer with deep roots in <strong>digital contracts</strong>, regulatory compliance, and legal operations across international technology environments. My work sits at the intersection of <span class="blue-text">law, process design, and technical implementation</span>.</p>
+        <p>Where most legal consultants stop at the recommendation, I go further. I <strong>map your workflows</strong>, stress-test your assumptions, connect your tools, and hand you something that <em>runs</em>. I'm comfortable designing, co-building, testing, and refining complex legal workflows from first principles.</p>
+        <p>My approach starts with listening. Most teams already have more than they need — they just <strong>haven't unlocked it yet</strong>. Before recommending anything new, I audit what you have, surface where the friction actually lives, and build toward the simplest version that works.</p>
+        <p>I work best with teams that are overwhelmed by the options, drowning in manual work, or about to invest in <strong>technology they aren't ready for yet</strong>.</p>
+      </div>
+    </div>
+    <div class="quals">
+      <div class="q-row">
+        <div class="q-label">Post-grad</div>
+        <div class="q-val">LL.M. in Digital Economy · Specialisation: EU Digital Regulation</div>
+      </div>
+      <div class="q-row">
+        <div class="q-label">Graduate</div>
+        <div class="q-val">Master's of Transnational Law</div>
+      </div>
+      <div class="q-row">
+        <div class="q-label">Undergrad</div>
+        <div class="q-val">Bachelor of Laws (LL.B.) · B.A. Political Science & International Relations</div>
+      </div>
+      <div class="q-row">
+        <div class="q-label">Core skills</div>
+        <div class="q-val">CLM Implementation · Contract Automation · Legal Workflow Design · EU Digital Law · Regulatory Compliance · LegalTech Strategy</div>
+      </div>
+      <div class="q-row">
+        <div class="q-label">Languages</div>
+        <div class="q-val">Spanish · English · Portuguese (working)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── NUMBERS ── -->
+<section class="tinted" id="numbers">
+  <div class="sec-eyebrow"><span class="num">02</span> By the numbers</div>
+  <h2 class="sec-h2">Outcomes that <span class="blue">speak directly.</span></h2>
+  <div class="numbers-grid fi">
+    <div class="n-cell">
+      <div class="n-big">50<sup>+</sup></div>
+      <div class="n-desc">Enterprise clients onboarded onto a CLM with blockchain-based e-signature, enabling real-time tracking of contractual commitments and directly enhancing operational efficiency.</div>
+    </div>
+    <div class="n-cell">
+      <div class="n-big">1K<sup>+</sup></div>
+      <div class="n-desc">Digital contracts managed across the full lifecycle on a CLM platform, in compliance with national electronic contracting and e-signature regulations.</div>
+    </div>
+    <div class="n-cell">
+      <div class="n-big">50<sup>%</sup></div>
+      <div class="n-desc">Reduction in manual processing time through legal automation solutions, streamlining document review and regulatory workflows end-to-end.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── METHOD ── -->
+<section id="method">
+  <div class="sec-eyebrow"><span class="num">03</span> Method</div>
+  <h2 class="sec-h2">How I <span class="blue">work.</span></h2>
+  <p style="color:var(--muted);font-size:15px;max-width:520px;">Every engagement follows the same rhythm — six steps that compound on each other. No shortcuts. No generic playbooks.</p>
+  <div class="method-grid fi">
+    <div class="m-step">
+      <div class="m-num">01</div>
+      <div class="m-name">Listen</div>
+      <div class="m-desc">Understand your team, tools, and pain points before touching anything.</div>
+    </div>
+    <div class="m-step">
+      <div class="m-num">02</div>
+      <div class="m-name">Map</div>
+      <div class="m-desc">Document every workflow, handoff, and bottleneck as it actually exists.</div>
+    </div>
+    <div class="m-step">
+      <div class="m-num">03</div>
+      <div class="m-name">Test</div>
+      <div class="m-desc">Challenge assumptions. Stress-test reality vs. what people think is happening.</div>
+    </div>
+    <div class="m-step">
+      <div class="m-num">04</div>
+      <div class="m-name">Standardise</div>
+      <div class="m-desc">Build templates and playbooks that don't depend on any one person.</div>
+    </div>
+    <div class="m-step">
+      <div class="m-num">05</div>
+      <div class="m-name">Connect</div>
+      <div class="m-desc">Wire tools together. Automate the repetitive. Surface the exceptions.</div>
+    </div>
+    <div class="m-step">
+      <div class="m-num">06</div>
+      <div class="m-name">Improve</div>
+      <div class="m-desc">Review, iterate, and keep the system honest as the business evolves.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASES ── -->
+<section class="tinted" id="cases">
+  <div class="sec-eyebrow"><span class="num">04</span> Case Studies</div>
+  <h2 class="sec-h2">The work, <span class="blue">in practice.</span></h2>
+  <div class="fi">
+
+    <div class="case-item" onclick="toggleCase(this)">
+      <div class="c-num">01</div>
+      <div>
+        <div class="c-tags">
+          <span class="c-tag">Public Sector</span>
+          <span class="c-tag">Digital Contracting</span>
+          <span class="c-tag">Policy</span>
+        </div>
+        <div class="c-title">Public-sector legal digitisation</div>
+        <div class="c-body">Coordinated with public institutions and policy stakeholders to support the rollout of a nationally recognised <strong>digital contracting framework</strong> for promise of sale and lease agreements.</div>
+        <div class="c-body-full">The work contributed to the modernisation of a traditionally manual process and helped enable broader adoption of electronic contracting — a structural shift, not a technical patch. Navigating public procurement constraints, multi-stakeholder sign-off, and legacy documentation requirements, the result was a framework that held up legally and was actually adopted.</div>
+        <div class="c-toggle">Read more ↓</div>
+      </div>
+    </div>
+
+    <div class="case-item" onclick="toggleCase(this)">
+      <div class="c-num">02</div>
+      <div>
+        <div class="c-tags">
+          <span class="c-tag">Change Management</span>
+          <span class="c-tag">CRM Integration</span>
+          <span class="c-tag">Automation</span>
+        </div>
+        <div class="c-title">Change management & CRM-led contract automation</div>
+        <div class="c-body">Supported a luxury travel client with a legacy workflow and <strong>low internal adoption</strong> of new tools — designed an automated contract journey aligned with the team's existing CRM-based way of working.</div>
+        <div class="c-body-full">Connected the CLM system, e-signature platform, CRM, and email notifications through Zapier. The result: smoother transition, fewer manual touchpoints, faster turnaround times, and significantly improved user adoption. The key was meeting the team where they already were — not forcing them into a new system from scratch.</div>
+        <div class="c-toggle">Read more ↓</div>
+      </div>
+    </div>
+
+    <div class="case-item" onclick="toggleCase(this)">
+      <div class="c-num">03</div>
+      <div>
+        <div class="c-tags">
+          <span class="c-tag">Workflow Automation</span>
+          <span class="c-tag">Post-Signature</span>
+          <span class="c-tag">Deadline Management</span>
+        </div>
+        <div class="c-title">Post-signature workflow automation</div>
+        <div class="c-body">Built an <strong>end-to-end post-signature automation</strong> replacing manual checks — once signed, CRM updated, welcome email sent, new CLM record created with signed document and key dates.</div>
+        <div class="c-body-full">Also implemented a deadline reminder workflow alerting the responsible team member 30 days before contract expiry. Reduced delays, minimised human error, and improved scalability in a high-volume environment. The team went from reactive to proactive without hiring anyone new.</div>
+        <div class="c-toggle">Read more ↓</div>
+      </div>
+    </div>
+
+    <div class="case-item" onclick="toggleCase(this)">
+      <div class="c-num">04</div>
+      <div>
+        <div class="c-tags">
+          <span class="c-tag">HR & Onboarding</span>
+          <span class="c-tag">Employment Contracts</span>
+          <span class="c-tag">Automation</span>
+        </div>
+        <div class="c-title">Employment contracts automation</div>
+        <div class="c-body">Developed a <strong>spreadsheet-based automation</strong> for employment contract generation using predefined data fields, connected to a CLM through Zapier — replacing repetitive manual drafting entirely.</div>
+        <div class="c-body-full">When a new row was completed with name, ID, salary, and email, the system generated the contract and sent it for signature automatically. Renewal reminders also wired in. The process made onboarding more consistent, faster, and less dependent on any one person knowing the workflow.</div>
+        <div class="c-toggle">Read more ↓</div>
+      </div>
+    </div>
+
+    <div class="case-item" onclick="toggleCase(this)">
+      <div class="c-num">05</div>
+      <div>
+        <div class="c-tags">
+          <span class="c-tag">LegalTech Strategy</span>
+          <span class="c-tag">LATAM Expansion</span>
+          <span class="c-tag">Regulatory Mapping</span>
+        </div>
+        <div class="c-title">Expansion to LATAM markets</div>
+        <div class="c-body">Supported the adaptation of an <strong>AI-driven litigation platform</strong> across Latin America — aligning product design, legal logic, and regulatory requirements with local market realities.</div>
+        <div class="c-body-full">Developed a comprehensive LATAM regulatory map, conducted UX and language testing in Spanish and Portuguese, and refined interface terminology and user flows. Performed a regulatory language compliance review across templates and automated outputs to ensure consistency with local legal standards and avoid misinterpretation risks.</div>
+        <div class="c-toggle">Read more ↓</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section id="services">
+  <div class="sec-eyebrow"><span class="num">05</span> Services</div>
+  <h2 class="sec-h2">Three ways to <span class="blue">work together.</span></h2>
+  <p style="color:var(--muted);font-size:15px;max-width:560px;">My team and I cut through the noise to identify which tools are worth implementing, where they fit, and how they deliver measurable impact — practical and aligned with how your team already operates.</p>
+  <div class="svc-grid fi">
+
+    <div class="svc-card">
+      <div class="svc-tier">01 · Diagnostic</div>
+      <div class="svc-name">The Risk Scan</div>
+      <div class="svc-desc">Most companies are sitting on hundreds of contracts they've never systematically read. Buried renewal dates, silent auto-renewals, inconsistent liability caps — My team and I surface it all and hand you a clean register you can act on.</div>
+      <ul class="svc-list">
+        <li>Kick-off call (60 min) + async cross-functional intake</li>
+        <li>Review of up to 20 contracts & tool stack</li>
+        <li>Top 3 contract risks with severity classification</li>
+        <li>Workflow bottleneck report</li>
+        <li>Tool verdict: keep, replace, or add</li>
+        <li>Prioritised 90-day roadmap</li>
+        <li>45-minute debrief call</li>
+      </ul>
+      <div class="svc-best"><strong>Best when:</strong> You know something is broken but don't know where to start.</div>
+    </div>
+
+    <div class="svc-card featured">
+      <div class="svc-tier">02 · Build</div>
+      <div class="svc-name">Legal Ops System Build</div>
+      <div class="svc-desc">Every contract request without a clear path creates friction. My team and I design the intake, routing, and playbook systems that make contract requests straightforward — built and handed over, ready to run.</div>
+      <ul class="svc-list">
+        <li>Process audit across Legal, Sales, Procurement & IT</li>
+        <li>Contract portfolio audit & obligation register</li>
+        <li>Templates for your top 5 contract types</li>
+        <li>Intake, routing & approval workflows</li>
+        <li>CLM configuration or no-CLM alternative</li>
+        <li>AI workflow integration on highest-volume type</li>
+        <li>4 live training sessions + full playbook</li>
+        <li>2-week post-launch support</li>
+      </ul>
+      <div class="svc-best"><strong>Best when:</strong> You're about to implement a CLM and need clean data and mapped processes first.</div>
+    </div>
+
+    <div class="svc-card">
+      <div class="svc-tier">03 · Ongoing</div>
+      <div class="svc-name">Fractional Legal Ops</div>
+      <div class="svc-desc">A dedicated Legal Ops expert embedded in your team on an ongoing basis. You get the function without the full-time hire. Operations runs. Legal focuses on law.</div>
+      <ul class="svc-list">
+        <li>Dedicated point of contact in Slack or Teams</li>
+        <li>Contract lifecycle from request to signature</li>
+        <li>Contract register & renewal calendaring</li>
+        <li>First-line review: NDAs, MSAs, SaaS subs</li>
+        <li>Monthly workflow review & optimisation</li>
+        <li>CLM / tool management & data hygiene</li>
+        <li>Template & playbook iteration</li>
+        <li>Quarterly Legal Ops health review + metrics</li>
+      </ul>
+      <div class="svc-best"><strong>Best when:</strong> You want someone who owns operations, so legal can focus on legal.</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="dark-band" id="contact">
+  <div class="cta-inner fi">
+    <div class="sec-eyebrow" style="justify-content:center;margin-bottom:24px;">Let's talk</div>
+    <h2 class="cta-h">You don't need more software.<br/>You need <span class="blue">a better system.</span></h2>
+    <p class="cta-sub">Tell me where it hurts. My team and I will figure out together whether the fix is a new tool, a new workflow, or just clarity.</p>
+    <a href="mailto:joselyne.garcia.m@gmail.com" class="cta-btn">joselyne.garcia.m@gmail.com →</a>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-brand">Joselyne García · Legal Ops Studio · 2026</div>
+  <div class="f-right">LL.M. Digital Economy · EU Digital Regulation</div>
+</footer>
+
+<script>
+  /* case accordion */
+  function toggleCase(el) {
+    const wasOpen = el.classList.contains('open');
+    document.querySelectorAll('.case-item.open').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.c-toggle').textContent = 'Read more ↓';
+    });
+    if (!wasOpen) {
+      el.classList.add('open');
+      el.querySelector('.c-toggle').textContent = 'Close ↑';
+    }
+  }
+
+  /* scroll fade */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
+  document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+  /* active nav */
+  const secs = document.querySelectorAll('[id]');
+  const links = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 140) cur = s.id; });
+    links.forEach(a => {
+      const match = a.getAttribute('href') === '#' + cur;
+      a.classList.toggle('active', match);
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Risk Scan · Joselyne García Legal Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FFFFFF; --bg: #F7F8FA; --ink: #111318; --ink2: #2C2F38;
+      --muted: #6B7080; --border: #E0E3EA;
+      --blue: #1547D4; --blue2: #1A56E8; --blue-bg: #EEF2FD; --blue-dim: #3A67F5;
+      --dark-bg: #080A12;
+    }
+    html, body { min-height: 100vh; background: var(--white); color: var(--ink); font-family: 'Inter', sans-serif; }
+    .page { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 56px; border-bottom: 1px solid var(--border);
+      background: var(--white);
+    }
+    .brand { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; color: var(--blue); text-transform: uppercase; }
+    .tier-badge {
+      font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .14em;
+      color: var(--white); background: var(--blue); padding: 6px 16px; text-transform: uppercase;
+    }
+    main { display: grid; grid-template-columns: 1fr 1fr; }
+    .left {
+      padding: 72px 56px; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+    .left::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 64px 64px; opacity: .4;
+      mask-image: linear-gradient(to bottom right, transparent 0%, black 70%);
+    }
+    .left-top { position: relative; z-index: 1; }
+    .service-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--blue); text-transform: uppercase; margin-bottom: 32px; opacity: .6; }
+    .service-title { font-family: 'DM Serif Display', serif; font-size: clamp(48px, 6vw, 80px); line-height: 1.0; letter-spacing: -.02em; margin-bottom: 24px; color: var(--ink); }
+    .service-title .blue { color: var(--blue); font-style: italic; display: block; }
+    .service-subtitle { font-size: 16px; color: var(--muted); line-height: 1.75; max-width: 400px; }
+    .left-bottom { position: relative; z-index: 1; }
+    .best-for { border-top: 2px solid var(--blue); padding-top: 24px; }
+    .best-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; margin-bottom: 8px; }
+    .best-text { font-size: 15px; color: var(--ink2); font-style: italic; line-height: 1.6; }
+    .right { background: var(--bg); padding: 72px 56px; display: flex; flex-direction: column; gap: 48px; }
+    .block-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .16em; color: var(--blue); text-transform: uppercase; margin-bottom: 16px; }
+    .problem-box { border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 28px 32px; background: var(--white); }
+    .problem-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 18px; line-height: 1.65; color: var(--ink2); }
+    .deliverable-item {
+      display: grid; grid-template-columns: 24px 1fr; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border); align-items: start;
+    }
+    .deliverable-item:first-child { border-top: 1px solid var(--border); }
+    .d-arrow { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--blue); padding-top: 1px; }
+    .d-text { font-size: 14px; color: var(--ink2); line-height: 1.6; }
+    .d-text strong { color: var(--ink); font-weight: 600; }
+    footer {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 56px; border-top: 1px solid var(--border); background: var(--white);
+    }
+    .f-left { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+    .f-cta {
+      font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em;
+      color: var(--white); background: var(--blue); padding: 10px 22px;
+      text-decoration: none; transition: background .2s;
+    }
+    .f-cta:hover { background: var(--blue2); }
+    @media (max-width: 800px) {
+      header, footer { padding: 20px 24px; }
+      main { grid-template-columns: 1fr; }
+      .left, .right { padding: 48px 24px; }
+      .left { border-right: none; border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="brand">Joselyne García · Legal Ops Studio</div>
+    <div class="tier-badge">Tier 01 · Diagnostic</div>
+  </header>
+  <main>
+    <div class="left">
+      <div class="left-top">
+        <div class="service-num">Service № 01</div>
+        <h1 class="service-title">The<br/><span class="blue">Risk Scan</span></h1>
+        <p class="service-subtitle">A structured diagnostic of your contract portfolio, workflow bottlenecks, and tool stack — delivered as a clean risk register and a 90-day roadmap you can act on immediately.</p>
+      </div>
+      <div class="left-bottom">
+        <div class="best-for">
+          <div class="best-label">Best when</div>
+          <div class="best-text">"You know something is broken but don't know where to start."</div>
+        </div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+        <div class="block-title">The problem my team and I solve</div>
+        <div class="problem-box">
+          <p class="problem-text">"Most companies are sitting on hundreds of contracts they've never systematically read. Buried renewal dates, silent auto-renewals, inconsistent liability caps, price escalation clauses no one remembers signing — it's all in there."</p>
+        </div>
+      </div>
+      <div>
+        <div class="block-title">What's included</div>
+        <div class="deliverable-item">
+          <div class="d-arrow">→</div>
+          <div class="d-text"><strong>Kick-off call (60 min)</strong> with your team lead</div>
+        </div>
+        <div class="deliverable-item">
+          <div class="d-arrow">→</div>
+          <div class="d-text"><strong>Cross-functional bottleneck discovery</strong> — async intake across Legal, Sales & Procurement to identify delays and root causes</div>
+        </div>
+        <div class="deliverable-item">
+          <div class="d-arrow">→</div>
+          <div class="d-text"><strong>Review of up to 20 contracts</strong>, current templates, and your tool stack</div>
+        </div>
+        <div class="deliverable-item">
+          <div class="d-arrow">→</div>
+          <div class="d-text"><strong>Written report:</strong> top 3 contract risks with severity classification, workflow bottlenecks, tool verdict, and a prioritised 90-day roadmap</div>
+        </div>
+        <div class="deliverable-item">
+          <div class="d-arrow">→</div>
+          <div class="d-text"><strong>45-minute debrief call</strong> to walk through findings together</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div class="f-left">joselyne.garcia.m@gmail.com</div>
+    <a class="f-cta" href="mailto:joselyne.garcia.m@gmail.com">Start with the Risk Scan →</a>
+  </footer>
+</div>
+</body>
+</html>

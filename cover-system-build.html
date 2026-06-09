@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legal Ops System Build · Joselyne García Legal Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --white: #FFFFFF; --bg: #F7F8FA; --ink: #111318; --ink2: #2C2F38;
+      --muted: #6B7080; --border: #E0E3EA;
+      --blue: #1547D4; --blue2: #1A56E8; --blue-bg: #EEF2FD;
+      --dark-bg: #080A12;
+    }
+    html, body { min-height: 100vh; background: var(--white); color: var(--ink); font-family: 'Inter', sans-serif; }
+    .page { min-height: 100vh; display: flex; flex-direction: column; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 56px; border-bottom: 1px solid var(--border);
+    }
+    .brand { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .12em; color: var(--blue); text-transform: uppercase; }
+    .tier-badge { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .14em; color: var(--white); background: var(--blue); padding: 6px 16px; text-transform: uppercase; }
+    .hero {
+      padding: 64px 56px 52px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end;
+      position: relative; overflow: hidden; background: var(--bg);
+    }
+    .hero::after { content: '02'; position: absolute; right: 40px; top: 20px; font-family: 'DM Serif Display', serif; font-size: 200px; line-height: 1; color: rgba(21,71,212,.04); pointer-events: none; user-select: none; }
+    .service-num { font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: .16em; color: var(--blue); text-transform: uppercase; margin-bottom: 20px; opacity: .7; }
+    .service-title { font-family: 'DM Serif Display', serif; font-size: clamp(40px, 5vw, 68px); line-height: 1.05; letter-spacing: -.025em; color: var(--ink); }
+    .service-title .blue { color: var(--blue); font-style: italic; }
+    .hero-desc { font-size: 16px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .best-tag { display: inline-flex; align-items: center; gap: 10px; font-size: 13px; color: var(--ink2); border: 1px solid var(--border); padding: 12px 18px; border-left: 3px solid var(--blue); }
+    .body-grid { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
+    .phase-col { padding: 56px; border-right: 1px solid var(--border); }
+    .col-title { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .16em; color: var(--blue); text-transform: uppercase; margin-bottom: 28px; }
+    .phase-item { display: grid; grid-template-columns: 32px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--border); }
+    .phase-item:first-child { border-top: 1px solid var(--border); }
+    .p-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--blue); padding-top: 3px; font-weight: 500; }
+    .p-label { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.4; }
+    .p-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .highlight-col { background: var(--bg); padding: 56px; display: flex; flex-direction: column; gap: 32px; }
+    .outcome-box { border: 1px solid var(--border); border-left: 3px solid var(--blue); padding: 28px 32px; background: var(--white); }
+    .ob-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: .14em; color: var(--blue); text-transform: uppercase; margin-bottom: 10px; }
+    .ob-text { font-family: 'DM Serif Display', serif; font-style: italic; font-size: 17px; line-height: 1.65; color: var(--ink2); }
+    .support-badge { background: var(--white); border: 1px solid var(--border); padding: 24px 28px; }
+    .sb-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+    .sb-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--blue); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+    .sb-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 20px 56px; border-top: 1px solid var(--border); }
+    .f-left { font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .06em; }
+    .f-cta { font-family: 'DM Mono', monospace; font-size: 12px; letter-spacing: .1em; color: var(--white); background: var(--blue); padding: 10px 22px; text-decoration: none; transition: background .2s; }
+    .f-cta:hover { background: var(--blue2); }
+    @media (max-width: 900px) {
+      header, footer { padding: 20px 24px; }
+      .hero { grid-template-columns: 1fr; gap: 32px; padding: 48px 24px 40px; }
+      .hero::after { display: none; }
+      .body-grid { grid-template-columns: 1fr; }
+      .phase-col { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 24px; }
+      .highlight-col { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="brand">Joselyne García · Legal Ops Studio</div>
+    <div class="tier-badge">Tier 02 · Build</div>
+  </header>
+  <div class="hero">
+    <div>
+      <div class="service-num">Service № 02</div>
+      <h1 class="service-title">Legal Ops<br/><span class="blue">System Build</span></h1>
+    </div>
+    <div>
+      <p class="hero-desc">Every contract request without a clear path creates friction. My team and I design the intake, routing, and playbook systems that make contract requests straightforward — built and handed over, ready to run.</p>
+      <div class="best-tag">Best when you're about to implement a CLM and need clean data and mapped processes before it goes in.</div>
+    </div>
+  </div>
+  <div class="body-grid">
+    <div class="phase-col">
+      <div class="col-title">What gets built</div>
+      <div class="phase-item">
+        <div class="p-num">01</div>
+        <div><div class="p-label">Process audit</div><div class="p-desc">Across Legal, Sales, Procurement & IT — identify where delays occur and which handoffs are causing bottlenecks.</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="p-num">02</div>
+        <div><div class="p-label">Contract portfolio audit</div><div class="p-desc">Inventory, metadata standardisation, obligation and renewal register. Review the full contract set for completeness and governance.</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="p-num">03</div>
+        <div><div class="p-label">Templates & playbooks</div><div class="p-desc">Standardised templates for your top 5 contract types. Approval workflows with decision trees that non-lawyers can follow.</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="p-num">04</div>
+        <div><div class="p-label">Intake & routing system</div><div class="p-desc">A clear path for every contract request. CLM configuration, or a no-CLM alternative if you don't have one.</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="p-num">05</div>
+        <div><div class="p-label">AI workflow integration</div><div class="p-desc">Automation on your highest-volume contract type, with 4 live team training sessions and full playbook documentation.</div></div>
+      </div>
+      <div class="phase-item">
+        <div class="p-num">06</div>
+        <div><div class="p-label">2-week post-launch support</div><div class="p-desc">Hands-on support after handover to ensure adoption, fix edge cases, and confirm the system is running as designed.</div></div>
+      </div>
+    </div>
+    <div class="highlight-col">
+      <div>
+        <div class="col-title">Why this matters</div>
+        <div class="outcome-box">
+          <div class="ob-label">The real cost of friction</div>
+          <p class="ob-text">"Operations doesn't know what to submit. Legal doesn't know what's urgent. Deals slow down, templates diverge, and people build workarounds that nobody documents. The system my team and I build replaces all of that."</p>
+        </div>
+      </div>
+      <div>
+        <div class="col-title">Post-launch</div>
+        <div class="support-badge">
+          <div class="sb-title"><span class="sb-dot"></span>2-week live support window</div>
+          <div class="sb-desc">After handover, I stay embedded to handle edge cases, tweak configurations as real usage reveals gaps, and ensure your team is confident running independently.</div>
+        </div>
+      </div>
+      <div>
+        <div class="col-title">The principle</div>
+        <div class="outcome-box">
+          <div class="ob-label">Before my team and I add anything new</div>
+          <p class="ob-text">"My team and I start by finding out what you already have and haven't unlocked yet. New technology is the last resort, not the first recommendation."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="f-left">joselyne.garcia.m@gmail.com</div>
+    <a class="f-cta" href="mailto:joselyne.garcia.m@gmail.com">Start the System Build →</a>
+  </footer>
+</div>
+</body>
+</html>
