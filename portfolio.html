@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Joselyne García · Legal Ops Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -29,7 +29,7 @@
     body {
       background: var(--white);
       color: var(--ink);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Times New Roman', Times, serif;
       font-size: 16px;
       line-height: 1.7;
       overflow-x: hidden;
@@ -83,6 +83,20 @@
       position: relative;
     }
     .hero-left {}
+    /* video next to name in hero */
+    .hero-name-row {
+      display: flex; align-items: flex-start; gap: 28px; margin-bottom: 0;
+    }
+    .hero-name-row .hero-h1 { flex: 1 1 auto; }
+    .hero-vid {
+      width: 200px; height: 200px; flex-shrink: 0; margin-top: 8px;
+    }
+    .hero-vid video {
+      width: 200px; height: 200px; display: block;
+      object-fit: cover;
+      border: 1px solid var(--border);
+      background: var(--dark-bg);
+    }
     .hero-eyebrow {
       font-family: 'DM Mono', monospace; font-size: 11px;
       letter-spacing: .16em; color: var(--blue);
@@ -393,6 +407,40 @@
     }
     .f-right { font-size: 12px; color: var(--muted); }
 
+    /* ── SERVICE ICON ── */
+    .svc-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-bg); border: 1px solid rgba(21,71,212,.15);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px; flex-shrink: 0;
+    }
+    .svc-icon svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.75; }
+    .svc-card:hover .svc-icon { background: var(--blue); }
+    .svc-card:hover .svc-icon svg { stroke: #fff; }
+
+    /* ── METHOD ICON ── */
+    .m-icon {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--blue-bg); border: 1px solid rgba(21,71,212,.2);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 10px;
+    }
+    .m-icon svg { width: 16px; height: 16px; stroke: var(--blue); fill: none; stroke-width: 2; }
+    .m-step:hover .m-icon { background: var(--blue); }
+    .m-step:hover .m-icon svg { stroke: #fff; }
+
+    /* ── BOOK CTA ── */
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn-secondary {
+      display: inline-flex; align-items: center; gap: 12px;
+      background: transparent; color: #fff;
+      font-size: 15px; font-weight: 600; letter-spacing: .03em;
+      padding: 16px 40px; text-decoration: none;
+      border: 1px solid rgba(255,255,255,.25);
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .cta-btn-secondary:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
+
     /* ── FADE IN ── */
     .fi { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
     .fi.visible { opacity: 1; transform: none; }
@@ -403,6 +451,8 @@
       section, .dark-band { padding: 64px 24px; }
       .hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
       .about-layout { grid-template-columns: 1fr; gap: 40px; }
+      .hero-name-row { flex-direction: column; }
+      .hero-vid { width: 100%; max-width: 300px; }
       .numbers-grid { grid-template-columns: 1fr; }
       .method-grid { grid-template-columns: repeat(3,1fr); }
       .svc-grid { grid-template-columns: 1fr; }
@@ -425,7 +475,7 @@
       <a href="#services">Services</a>
     </div>
   </div>
-  <a href="mailto:joselyne.garcia.m@gmail.com" class="nav-tag">Get in touch →</a>
+  <a href="#contact" class="nav-tag">Book a call →</a>
 </nav>
 
 <main>
@@ -433,11 +483,19 @@
 <!-- ── HERO ── -->
 <div class="hero" id="top">
   <div class="hero-left">
-    <div class="hero-eyebrow">Legal AI Implementation · LegalTech Consulting</div>
-    <h1 class="hero-h1">
-      Joselyne<br/>
-      <span class="blue">García.</span>
-    </h1>
+    <div class="hero-eyebrow">Legal Operations | Legal Engineering</div>
+    <div class="hero-name-row">
+      <h1 class="hero-h1">
+        Joselyne<br/>
+        <span class="blue">García.</span>
+      </h1>
+      <div class="hero-vid">
+        <video controls preload="metadata">
+          <source src="video.mov" type="video/mp4">
+          <source src="video.mov" type="video/quicktime">
+        </video>
+      </div>
+    </div>
     <p class="hero-sub-label">Legal Ops · Strategy · Execution</p>
     <p class="hero-tagline">Reality-checker between the hype and what actually works in a real legal environment.</p>
   </div>
@@ -522,16 +580,16 @@
   <h2 class="sec-h2">Outcomes that <span class="blue">speak directly.</span></h2>
   <div class="numbers-grid fi">
     <div class="n-cell">
-      <div class="n-big">50<sup>+</sup></div>
-      <div class="n-desc">Enterprise clients onboarded onto a CLM with blockchain-based e-signature, enabling real-time tracking of contractual commitments and directly enhancing operational efficiency.</div>
+      <div class="n-big">70<sup>%+</sup></div>
+      <div class="n-desc">Reduction in manual contract handling through end-to-end automation across CLM, CRM, and post-signature workflows.</div>
     </div>
     <div class="n-cell">
-      <div class="n-big">1K<sup>+</sup></div>
-      <div class="n-desc">Digital contracts managed across the full lifecycle on a CLM platform, in compliance with national electronic contracting and e-signature regulations.</div>
+      <div class="n-big" style="font-size:clamp(48px,5vw,64px);letter-spacing:-.03em;">2–3<sup style="font-size:.5em">×</sup></div>
+      <div class="n-desc">Faster contract turnaround times driven by integrated e-signature, automated generation, and notification systems.</div>
     </div>
     <div class="n-cell">
-      <div class="n-big">50<sup>%</sup></div>
-      <div class="n-desc">Reduction in manual processing time through legal automation solutions, streamlining document review and regulatory workflows end-to-end.</div>
+      <div class="n-big">90<sup>%+</sup></div>
+      <div class="n-desc">User adoption achieved through CRM-aligned change management and workflow design tailored to existing team behaviours.</div>
     </div>
   </div>
 </section>
@@ -543,31 +601,37 @@
   <p style="color:var(--muted);font-size:15px;max-width:520px;">Every engagement follows the same rhythm — six steps that compound on each other. No shortcuts. No generic playbooks.</p>
   <div class="method-grid fi">
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0"/><path d="M12 8v4l3 3"/></svg></div>
       <div class="m-num">01</div>
       <div class="m-name">Listen</div>
       <div class="m-desc">Understand your team, tools, and pain points before touching anything.</div>
     </div>
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><path d="M13 17h8M17 13v8"/></svg></div>
       <div class="m-num">02</div>
       <div class="m-name">Map</div>
       <div class="m-desc">Document every workflow, handoff, and bottleneck as it actually exists.</div>
     </div>
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg></div>
       <div class="m-num">03</div>
       <div class="m-name">Test</div>
       <div class="m-desc">Challenge assumptions. Stress-test reality vs. what people think is happening.</div>
     </div>
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
       <div class="m-num">04</div>
       <div class="m-name">Standardise</div>
       <div class="m-desc">Build templates and playbooks that don't depend on any one person.</div>
     </div>
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
       <div class="m-num">05</div>
       <div class="m-name">Connect</div>
       <div class="m-desc">Wire tools together. Automate the repetitive. Surface the exceptions.</div>
     </div>
     <div class="m-step">
+      <div class="m-icon"><svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
       <div class="m-num">06</div>
       <div class="m-name">Improve</div>
       <div class="m-desc">Review, iterate, and keep the system honest as the business evolves.</div>
@@ -667,53 +731,59 @@
   <div class="svc-grid fi">
 
     <div class="svc-card">
-      <div class="svc-tier">01 · Diagnostic</div>
-      <div class="svc-name">The Risk Scan</div>
-      <div class="svc-desc">Most companies are sitting on hundreds of contracts they've never systematically read. Buried renewal dates, silent auto-renewals, inconsistent liability caps — My team and I surface it all and hand you a clean register you can act on.</div>
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="svc-tier">01 · Automation</div>
+      <div class="svc-name">Operations Automation Build</div>
+      <div class="svc-desc">I take a manual or broken workflow and build the system that runs it, designed for your operation, handed over fully working, with your team trained on it.</div>
       <ul class="svc-list">
-        <li>Kick-off call (60 min) + async cross-functional intake</li>
-        <li>Review of up to 20 contracts & tool stack</li>
-        <li>Top 3 contract risks with severity classification</li>
-        <li>Workflow bottleneck report</li>
-        <li>Tool verdict: keep, replace, or add</li>
-        <li>Prioritised 90-day roadmap</li>
-        <li>45-minute debrief call</li>
+        <li>Full process audit — every step, gap and handoff mapped</li>
+        <li>AI opportunity assessment</li>
+        <li>Custom workflow & automation build</li>
+        <li>Implementation of workflows and automations</li>
+        <li>Tool selection & configuration</li>
+        <li>Up to 4 live training sessions + full playbook</li>
+        <li>2-week post-launch support</li>
       </ul>
-      <div class="svc-best"><strong>Best when:</strong> You know something is broken but don't know where to start.</div>
+      <div class="svc-best"><strong>Best for:</strong> Any team running a process by hand that knows something is broken but doesn't know where to start.</div>
     </div>
 
     <div class="svc-card featured">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14"/><path d="M8 21h8M12 17v4"/><path d="M7 8h10M7 11h6"/></svg>
+      </div>
       <div class="svc-tier">02 · Build</div>
       <div class="svc-name">Legal Ops System Build</div>
-      <div class="svc-desc">Every contract request without a clear path creates friction. My team and I design the intake, routing, and playbook systems that make contract requests straightforward — built and handed over, ready to run.</div>
+      <div class="svc-desc">Every contract request without a clear path creates friction. I design the intake, routing and playbook systems that make contract requests straightforward, built and handed over.</div>
       <ul class="svc-list">
         <li>Process audit across Legal, Sales, Procurement & IT</li>
         <li>Contract portfolio audit & obligation register</li>
-        <li>Templates for your top 5 contract types</li>
-        <li>Intake, routing & approval workflows</li>
+        <li>Standardised templates & playbooks for your top 5 types</li>
+        <li>Intake & routing system</li>
+        <li>Approval workflows with decision trees non-lawyers can follow</li>
         <li>CLM configuration or no-CLM alternative</li>
-        <li>AI workflow integration on highest-volume type</li>
-        <li>4 live training sessions + full playbook</li>
-        <li>2-week post-launch support</li>
+        <li>AI integration on your highest-volume contract type</li>
       </ul>
-      <div class="svc-best"><strong>Best when:</strong> You're about to implement a CLM and need clean data and mapped processes first.</div>
+      <div class="svc-best"><strong>Best when:</strong> You're about to implement a CLM and need clean data and mapped processes before it goes in.</div>
     </div>
 
     <div class="svc-card">
+      <div class="svc-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+      </div>
       <div class="svc-tier">03 · Ongoing</div>
-      <div class="svc-name">Fractional Legal Ops</div>
-      <div class="svc-desc">A dedicated Legal Ops expert embedded in your team on an ongoing basis. You get the function without the full-time hire. Operations runs. Legal focuses on law.</div>
+      <div class="svc-name">Fractional Head of Operations</div>
+      <div class="svc-desc">Your automations are built, now keep them running. Tools update and processes drift. I monitor, fix and tune the systems so they keep working without you having to think about them.</div>
       <ul class="svc-list">
+        <li>Health monitoring — catch breakages before they cost you</li>
+        <li>Break-fix when a tool updates or a workflow stalls</li>
+        <li>Configuration upkeep</li>
+        <li>Up to 2 adjustments a month to existing workflows</li>
         <li>Dedicated point of contact in Slack or Teams</li>
-        <li>Contract lifecycle from request to signature</li>
-        <li>Contract register & renewal calendaring</li>
-        <li>First-line review: NDAs, MSAs, SaaS subs</li>
-        <li>Monthly workflow review & optimisation</li>
-        <li>CLM / tool management & data hygiene</li>
-        <li>Template & playbook iteration</li>
-        <li>Quarterly Legal Ops health review + metrics</li>
+        <li>Monthly check-in on what's running and what could be better</li>
       </ul>
-      <div class="svc-best"><strong>Best when:</strong> You want someone who owns operations, so legal can focus on legal.</div>
+      <div class="svc-best"><strong>Best for:</strong> Any team relying on automated systems day to day that needs them to keep working without interruption.</div>
     </div>
 
   </div>
@@ -725,7 +795,10 @@
     <div class="sec-eyebrow" style="justify-content:center;margin-bottom:24px;">Let's talk</div>
     <h2 class="cta-h">You don't need more software.<br/>You need <span class="blue">a better system.</span></h2>
     <p class="cta-sub">Tell me where it hurts. My team and I will figure out together whether the fix is a new tool, a new workflow, or just clarity.</p>
-    <a href="mailto:joselyne.garcia.m@gmail.com" class="cta-btn">joselyne.garcia.m@gmail.com →</a>
+    <div class="cta-buttons">
+      <a href="https://calendly.com/joselyne-garcia-m/30min?month=2026-06" class="cta-btn" target="_blank" rel="noopener">Book a 30-min call →</a>
+      <a href="mailto:joselyne.garcia.m@gmail.com" class="cta-btn-secondary">joselyne.garcia.m@gmail.com</a>
+    </div>
   </div>
 </div>
 
