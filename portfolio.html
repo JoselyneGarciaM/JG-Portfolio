@@ -439,15 +439,64 @@
 
     /* ── BOOK CTA ── */
     .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .cta-btn-secondary {
-      display: inline-flex; align-items: center; gap: 12px;
-      background: transparent; color: #fff;
-      font-size: 15px; font-weight: 600; letter-spacing: .03em;
-      padding: 16px 40px; text-decoration: none;
-      border: 1px solid rgba(255,255,255,.25);
-      transition: background .2s, border-color .2s, transform .2s;
+
+    /* ── CONTACT FORM ── */
+    .contact-form-wrap {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 40px 44px;
+      margin-top: 48px;
+      max-width: 720px;
+      margin-left: auto; margin-right: auto;
+      text-align: left;
     }
-    .cta-btn-secondary:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
+    .contact-form-wrap h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px; color: #fff; margin-bottom: 8px;
+    }
+    .contact-form-wrap > p {
+      font-size: 14px; color: #8088A0; margin-bottom: 32px; line-height: 1.6;
+    }
+    .form-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;
+    }
+    .form-field { display: flex; flex-direction: column; gap: 7px; margin-bottom: 16px; }
+    .form-field:last-of-type { margin-bottom: 0; }
+    .form-field label {
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: .12em; color: #8088A0; text-transform: uppercase;
+    }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: #fff;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 14px; padding: 12px 16px;
+      outline: none; transition: border-color .2s;
+      appearance: none; -webkit-appearance: none;
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder { color: rgba(255,255,255,.22); }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus { border-color: var(--blue); }
+    .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238088A0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+    .form-field select option { background: #080A12; color: #fff; }
+    .form-field textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%; background: var(--blue); color: #fff; border: none;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 15px; font-weight: 600; letter-spacing: .03em;
+      padding: 16px 40px; cursor: pointer; margin-top: 24px;
+      transition: background .2s, transform .2s;
+    }
+    .form-submit:hover { background: var(--blue2); transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .form-row { grid-template-columns: 1fr; }
+      .contact-form-wrap { padding: 28px 24px; }
+    }
 
     /* ── FADE IN ── */
     .fi { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
@@ -815,8 +864,58 @@
     <p class="cta-sub">Tell me where it hurts. My team and I will figure out together whether the fix is a new tool, a new workflow, or just clarity.</p>
     <div class="cta-buttons">
       <a href="https://calendly.com/joselyne-garcia-m/30min?month=2026-06" class="cta-btn" target="_blank" rel="noopener">Free discovery call →</a>
-      <a href="mailto:joselyne.garcia.m@gmail.com" class="cta-btn-secondary">joselyne.garcia.m@gmail.com</a>
     </div>
+
+    <!-- Contact form -->
+    <div class="contact-form-wrap fi">
+      <h3>Let's Scope Your Project</h3>
+      <p>Tell us what you're working on. We'll respond within one business day.</p>
+      <form action="https://formsubmit.co/joselyne.garcia.m@gmail.com" method="POST">
+        <input type="hidden" name="_subject" value="New project enquiry — JG Portfolio" />
+        <input type="hidden" name="_next" value="https://joselynegarcia-legal.netlify.app/thank-you.html" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" style="display:none" />
+        <div class="form-row">
+          <div class="form-field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="service">Service interested in</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Choose a service</option>
+              <option value="Operations Automation Build">Operations Automation Build</option>
+              <option value="Legal Ops System Build">Legal Ops System Build</option>
+              <option value="Fractional Head of Operations">Fractional Head of Operations</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label for="start">When would you like to start?</label>
+            <select id="start" name="start" required>
+              <option value="" disabled selected>Select timeline</option>
+              <option value="As soon as possible">As soon as possible</option>
+              <option value="Within 1 month">Within 1 month</option>
+              <option value="1–3 months">1–3 months</option>
+              <option value="3–6 months">3–6 months</option>
+              <option value="Just exploring">Just exploring</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us about your project, current challenges, or what you'd like to improve…" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message →</button>
+      </form>
+    </div>
+
   </div>
 </div>
 
